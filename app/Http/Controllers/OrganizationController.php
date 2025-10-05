@@ -13,11 +13,6 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class OrganizationController extends Controller
 {
-    public function list()
-    {
-        // 
-    }
-
     public function index(): AnonymousResourceCollection
     {
         return OrganizationResource::collection(Organization::paginate(100));
@@ -51,5 +46,10 @@ class OrganizationController extends Controller
     public function destroy(Organization $organization): void
     {
         $organization->delete();
+    }
+
+    public function list()
+    {
+        //
     }
 }

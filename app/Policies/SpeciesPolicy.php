@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Policies;
 
-use App\Models\Animal;
+use App\Models\Species;
 use App\Models\User;
 
-class AnimalPolicy
+class SpeciesPolicy
 {
     public function viewAny(User $user): bool
     {
         return false;
     }
 
-    public function view(User $user, Animal $animal): bool
+    public function view(User $user, Species $species): bool
     {
         return false;
     }
@@ -24,22 +24,22 @@ class AnimalPolicy
         return false;
     }
 
-    public function update(User $user, Animal $animal): bool
+    public function update(User $user, Species $species): bool
     {
         return false;
     }
 
-    public function delete(User $user, Animal $animal): bool
+    public function delete(User $user, Species $species): bool
     {
         return false;
     }
 
-    public function restore(User $user, Animal $animal): bool
+    public function restore(User $user, Species $species): bool
     {
         return false;
     }
 
-    public function forceDelete(User $user, Animal $animal): bool
+    public function forceDelete(User $user, Species $species): bool
     {
         return false;
     }

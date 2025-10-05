@@ -31,6 +31,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function organizations(): BelongsToMany
+    {
+        return $this->belongsToMany(Organization::class);
+    }
+
     /**
      * @return array<string, string>
      */
@@ -40,10 +45,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    public function organizations(): BelongsToMany
-    {
-        return $this->belongsToMany(Organization::class);
     }
 }

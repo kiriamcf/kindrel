@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Models\Species;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class AnimalFactory extends Factory
+class SpeciesFactory extends Factory
 {
     /**
      * @return array<string, mixed>
@@ -15,10 +14,8 @@ class AnimalFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'species_id' => Species::factory(),
-            'age' => fake()->numberBetween(1, 15),
-            'arrival_date' => fake()->date(),
+            'name' => fake()->word(),
+            'description' => fake()->sentence(),
         ];
     }
 }

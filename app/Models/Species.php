@@ -7,7 +7,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Animal extends Model
+class Species extends Model
 {
     use HasFactory;
 
@@ -16,17 +16,7 @@ class Animal extends Model
      */
     protected $fillable = [
         'name',
-        'species',
-        'breed',
-        'age',
-        'arrival_date',
-    ];
-
-    /**
-     * @return array<string, string>
-     */
-    protected $casts = [
-        'age' => 'integer',
-        'arrival_date' => 'datetime',
+        'scientific_name',
+        'icon',
     ];
 }
