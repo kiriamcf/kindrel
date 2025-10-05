@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class OrganizationFactory extends Factory
+class AnimalFactory extends Factory
 {
     /**
      * @return array<string, mixed>
@@ -15,10 +13,10 @@ class OrganizationFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'slug' => fake()->slug(),
-            'email' => fake()->unique()->safeEmail(),
-            'address' => fake()->address(),
-            'phone' => fake()->phoneNumber(),
+            // 'species' => fake()->word(),
+            // 'age' => fake()->numberBetween(1, 15),
+            'weight' => fake()->numberBetween(5, 100),
+            'height' => fake()->numberBetween(30, 100),
         ];
     }
 }

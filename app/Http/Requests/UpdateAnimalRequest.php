@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class StoreOrganizationRequest extends FormRequest
+class UpdateAnimalRequest extends FormRequest
 {
     public function authorize(): bool
     {
