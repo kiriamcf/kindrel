@@ -13,12 +13,12 @@ class SpeciesSeeder extends Seeder
     {
         Species::createMany([
             [
-                'name' => 'Dog',
+                'name' => 'Gos',
                 'icon' => '🐶',
                 'scientific_name' => 'Canis lupus familiaris',
             ],
             [
-                'name' => 'Cat',
+                'name' => 'Gat',
                 'icon' => '🐱',
                 'scientific_name' => 'Felis catus',
             ],

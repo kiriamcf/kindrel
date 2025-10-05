@@ -7,6 +7,8 @@
             "anonymous_class": true,
             "named_class": true
         },
-        "declare_strict_types": true
+        "declare_strict_types": true,
+        "phpdoc_no_empty_return": true,
+        "phpdoc_no_useless_inheritdoc": true
     }
 }

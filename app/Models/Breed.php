@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Animal extends Model
+class Breed extends Model
 {
     use HasFactory;
 
@@ -17,29 +17,18 @@ class Animal extends Model
      */
     protected $fillable = [
         'name',
-        'species',
-        'breed',
-        'age',
-        'arrival_date',
+        'species_id',
     ];
 
     /**
      * @return array<string, string>
      */
     protected $casts = [
-        'age' => 'integer',
         'species_id' => 'integer',
-        'breed_id' => 'integer',
-        'arrival_date' => 'datetime',
     ];
 
     public function species(): BelongsTo
     {
         return $this->belongsTo(Species::class);
-    }
-
-    public function breed(): BelongsTo
-    {
-        return $this->belongsTo(Breed::class);
     }
 }
