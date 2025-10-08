@@ -6,62 +6,56 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSpeciesRequest;
 use App\Http\Requests\UpdateSpeciesRequest;
+use App\Http\Resources\SpeciesResource;
 use App\Models\Species;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response as HttpResponse;
+use Illuminate\Support\Facades\Response;
 
 class SpeciesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
-        //
+        return SpeciesResource::collection(Species::paginate(100));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreSpeciesRequest $request)
+    public function store(StoreSpeciesRequest $request): SpeciesResource
     {
-        //
+        $species = Species::create($request->validated());
+
+        return SpeciesResource::make($species);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Species $species)
+    public function show(Species $species): SpeciesResource
     {
-        //
+        return SpeciesResource::make($species);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Species $species)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateSpeciesRequest $request, Species $species)
+    public function update(UpdateSpeciesRequest $request, Species $species): HttpResponse
     {
-        //
+        $species->update($request->validated());
+
+        return Response::noContent();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Species $species)
+    public function destroy(Species $species): HttpResponse
+    {
+        $species->delete();
+
+        return Response::noContent();
+    }
+
+    public function list()
     {
         //
     }

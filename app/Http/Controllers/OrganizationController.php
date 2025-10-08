@@ -8,8 +8,9 @@ use App\Http\Requests\StoreOrganizationRequest;
 use App\Http\Requests\UpdateOrganizationRequest;
 use App\Http\Resources\OrganizationResource;
 use App\Models\Organization;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response as HttpResponse;
+use Illuminate\Support\Facades\Response;
 
 class OrganizationController extends Controller
 {
@@ -23,14 +24,16 @@ class OrganizationController extends Controller
         //
     }
 
-    public function store(StoreOrganizationRequest $request): void
+    public function store(StoreOrganizationRequest $request): OrganizationResource
     {
-        Organization::create($request->validated());
+        $organization = Organization::create($request->validated());
+
+        return OrganizationResource::make($organization);
     }
 
-    public function show(Request $request, Organization $organization): array
+    public function show(Organization $organization): OrganizationResource
     {
-        return OrganizationResource::make($organization)->toArray($request);
+        return OrganizationResource::make($organization);
     }
 
     public function edit(Organization $organization)
@@ -38,14 +41,18 @@ class OrganizationController extends Controller
         //
     }
 
-    public function update(UpdateOrganizationRequest $request, Organization $organization): void
+    public function update(UpdateOrganizationRequest $request, Organization $organization): HttpResponse
     {
         $organization->update($request->validated());
+
+        return Response::noContent();
     }
 
-    public function destroy(Organization $organization): void
+    public function destroy(Organization $organization): HttpResponse
     {
         $organization->delete();
+
+        return Response::noContent();
     }
 
     public function list()

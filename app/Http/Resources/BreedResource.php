@@ -7,7 +7,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrganizationResource extends JsonResource
+class BreedResource extends JsonResource
 {
     /**
      * @return array<string, mixed>
@@ -16,10 +16,7 @@ class OrganizationResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'slug' => $this->slug,
-            'email' => $this->email,
-            'address' => $this->address,
-            'phone' => $this->phone,
+            'species' => SpeciesResource::make($this->species),
             'created_at' => $this->created_at->toDateString(),
             'updated_at' => $this->updated_at->toDateString(),
         ];
