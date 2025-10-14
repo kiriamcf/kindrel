@@ -17,8 +17,8 @@ class Animal extends Model
      */
     protected $fillable = [
         'name',
-        'species',
-        'breed',
+        'species_id',
+        'breed_id',
         'age',
         'arrival_date',
     ];

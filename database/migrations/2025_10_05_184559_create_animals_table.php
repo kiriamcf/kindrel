@@ -15,7 +15,7 @@ return new class() extends Migration
 
             $table->string('name');
             $table->foreignId('species_id')->constrained()->onDelete('cascade');
-            // $table->string('breed');
+            $table->foreignId('breed_id')->constrained()->onDelete('cascade');
             $table->integer('age');
             $table->dateTime('arrival_date');
 

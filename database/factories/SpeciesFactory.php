@@ -15,7 +15,8 @@ class SpeciesFactory extends Factory
     {
         return [
             'name' => fake()->word(),
-            'description' => fake()->sentence(),
+            'scientific_name' => fake()->word(),
+            'icon' => fake()->word(),
         ];
     }
 }
