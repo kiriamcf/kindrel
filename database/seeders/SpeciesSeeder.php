@@ -11,7 +11,7 @@ class SpeciesSeeder extends Seeder
 {
     public function run(): void
     {
-        Species::createMany([
+        Species::insert([
             [
                 'name' => 'Gos',
                 'icon' => '🐶',

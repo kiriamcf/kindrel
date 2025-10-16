@@ -14,7 +14,7 @@ return new class() extends Migration
             $table->id();
 
             $table->string('name')->unique();
-            $table->text('scientific_name')->unique();
+            $table->string('scientific_name')->unique();
             $table->string('icon');
 
             $table->timestamps();
