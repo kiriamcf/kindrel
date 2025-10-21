@@ -14,7 +14,7 @@ class Organization
     public function handle(Request $request, Closure $next): Response|RedirectResponse
     {
         if ($request->user()->organizations()->doesntExist()) {
-            return redirect()->route('backoffice.organizations.request');
+            return redirect()->route('backoffice.organizations.requestAccess');
         }
 
         return $next($request);

@@ -11,6 +11,6 @@ class OrganizationUserController extends Controller
 {
     public function list(): Response
     {
-        return Inertia::render('organizationUser/List');
+        return Inertia::render('RequestOrganizationAccess');
     }
 }

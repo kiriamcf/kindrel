@@ -13,29 +13,28 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes/backoffice';
 import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { Link, usePage } from '@inertiajs/vue3';
+import { LayoutGrid, KeyRound } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
+import { requestAccess } from '@/routes/backoffice/organizations';
+
+const page = usePage();
 
 const mainNavItems: NavItem[] = [
+    {
+        title: 'Request Access',
+        href: requestAccess(),
+        icon: KeyRound,
+    },
     {
         title: 'Dashboard',
         href: dashboard(),
         icon: LayoutGrid,
-    },
+        disabled: page.props.auth.org === null,
+    }
 ];
 
 const footerNavItems: NavItem[] = [
-    {
-        title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-    },
 ];
 </script>
 

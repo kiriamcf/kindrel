@@ -9,6 +9,7 @@ import {
 import { urlIsActive } from '@/lib/utils';
 import { type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
+import { Lock } from 'lucide-vue-next';
 
 defineProps<{
     items: NavItem[];
@@ -27,7 +28,13 @@ const page = usePage();
                     :is-active="urlIsActive(item.href, page.url)"
                     :tooltip="item.title"
                 >
-                    <Link :href="item.href">
+                    <button disabled v-if="item.disabled">
+                        <component :is="item.icon" />
+                        <span>{{ item.title }}</span>
+                        <Lock class="ml-auto" />
+                    </button>
+
+                    <Link :href="item.href" v-else>
                         <component :is="item.icon" />
                         <span>{{ item.title }}</span>
                     </Link>

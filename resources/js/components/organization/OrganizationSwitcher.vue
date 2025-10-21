@@ -3,7 +3,7 @@ import { defineProps } from 'vue';
 import { Organization } from '@/types';
 
 const props = defineProps<{
-    current: Organization;
+    current?: Organization;
 }>();
 </script>
 
