@@ -8,7 +8,7 @@ test('organization model has fillable attributes', function () {
     $organization = new Organization();
 
     expect($organization->getFillable())
-        ->toBe(['name', 'slug', 'address', 'phone', 'email']);
+        ->toBe(['name', 'slug', 'description', 'address', 'phone', 'email']);
 });
 
 test('organization model has slug as route key name', function () {

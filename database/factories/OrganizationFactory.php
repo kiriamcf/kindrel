@@ -15,7 +15,8 @@ class OrganizationFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'slug' => fake()->slug(),
+            'slug' => fake()->unique()->slug(),
+            'description' => fake()->paragraph(),
             'email' => fake()->unique()->safeEmail(),
             'address' => fake()->address(),
             'phone' => fake()->phoneNumber(),

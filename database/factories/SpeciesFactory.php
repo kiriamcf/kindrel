@@ -14,8 +14,8 @@ class SpeciesFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->word(),
-            'scientific_name' => fake()->word(),
+            'name' => fake()->unique()->word(),
+            'scientific_name' => fake()->unique()->word(),
             'icon' => fake()->word(),
         ];
     }
