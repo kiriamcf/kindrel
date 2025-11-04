@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  web:
+    image: kindrel:latest
+    build:
+      target: web
+      context: .
+    env_file:
+      - .env.docker
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+  
+  db:
+    platform: "linux/amd64"
+    image: mysql:5.7
+    command: --skip-ssl
+    env_file:
+      - .env.docker
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
