@@ -14,14 +14,15 @@ defineProps<Props>()
         <template v-for="(link, key) in links">
             <Button v-if="link.url === null"
                 :key="key"
-                variant="outline">
-                {{ link.label }}
+                variant="outline"
+                disabled>
+                <span v-html="link.label" />
             </Button>
             <Link v-else 
                 :key="`link-${key}`" 
                 :href="link.url">
                 <Button :variant="link.active ? 'default' : 'outline'">
-                    {{ link.label }}
+                    <span v-html="link.label" />
                 </Button>
             </Link>
         </template>
