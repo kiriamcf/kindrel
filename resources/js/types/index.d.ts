@@ -49,6 +49,4 @@ export interface Organization {
     updated_at: string;
 }
 
-export interface ShortOrganization extends Pick<Organization, 'id' | 'name'> {}
-
 export type BreadcrumbItemType = BreadcrumbItem;

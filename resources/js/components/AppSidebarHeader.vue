@@ -4,7 +4,7 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import OrganizationSwitcher from '@/components/organization/OrganizationSwitcher.vue';
 import type { BreadcrumbItemType } from '@/types';
 
-const props = withDefaults(
+withDefaults(
     defineProps<{
         breadcrumbs?: BreadcrumbItemType[];
     }>(),
