@@ -33,4 +33,11 @@ class Organization extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function requests(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'organization_user_requests')
+            ->withPivot('status')
+            ->using(OrganizationUserRequest::class);
+    }
 }

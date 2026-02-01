@@ -16,14 +16,14 @@ import { type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
 import { LayoutGrid, KeyRound } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
-import { requestAccess } from '@/routes/backoffice/organizations';
+import { list } from '@/routes/backoffice/organizations';
 
 const page = usePage();
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Request Access',
-        href: requestAccess(),
+        href: list(),
         icon: KeyRound,
     },
     {

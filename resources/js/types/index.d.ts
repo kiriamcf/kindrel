@@ -41,6 +41,7 @@ export interface User {
 export interface Organization {
     id: number;
     name: string;
+    description: string;
     slug: string;
     email: string;
     address?: string;

@@ -46,4 +46,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function requests(): BelongsToMany
+    {
+        return $this->belongsToMany(Organization::class, 'organization_user_requests')
+            ->withPivot('status')
+            ->using(OrganizationUserRequest::class);
+    }
 }
