@@ -18,14 +18,23 @@ class OrganizationUserController extends Controller
 {
     public function list(#[CurrentUser] User $user): Response
     {
-        $organizations = Organization::paginate(12);
-        $alreadyRequested = OrganizationUserRequest::where('user_id', $user->id)
+        $requests = OrganizationUserRequest::where('user_id', $user->id)
+            ->get(['organization_id', 'status']);
+
+        $granted = $requests->where('status', OrgRequestStatus::APPROVED->value)
             ->pluck('organization_id')
             ->toArray();
 
+        $requested = $requests->where('status', OrgRequestStatus::PENDING->value)
+            ->pluck('organization_id')
+            ->toArray();
+
+        $organizations = Organization::whereIntegerNotInRaw('id', $granted)
+            ->paginate(12);
+
         return Inertia::render('RequestOrganizationAccess', [
             'organizations' => $organizations,
-            'alreadyRequested' => $alreadyRequested,
+            'requested' => $requested,
         ]);
     }
 
