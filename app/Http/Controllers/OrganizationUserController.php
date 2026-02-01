@@ -16,12 +16,16 @@ use Illuminate\Support\Facades\Redirect;
 
 class OrganizationUserController extends Controller
 {
-    public function list(): Response
+    public function list(#[CurrentUser] User $user): Response
     {
         $organizations = Organization::paginate(12);
+        $alreadyRequested = OrganizationUserRequest::where('user_id', $user->id)
+            ->pluck('organization_id')
+            ->toArray();
 
         return Inertia::render('RequestOrganizationAccess', [
             'organizations' => $organizations,
+            'alreadyRequested' => $alreadyRequested,
         ]);
     }
 

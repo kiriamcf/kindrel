@@ -11,6 +11,7 @@ interface Props {
         data: Organization[];
         links: Array<{ url: string | null; label: string; active: boolean }>;
     };
+    alreadyRequested: number[];
 }
 
 defineProps<Props>();
@@ -35,7 +36,7 @@ defineProps<Props>();
     
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                 <template v-for="organization in organizations.data" :key="organization.id">
-                    <OrganizationAccess :organization />
+                    <OrganizationAccess :organization :already-requested="alreadyRequested.includes(organization.id)" />
                 </template>
             </div>
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Button from "@/components/ui/button/Button.vue";
 import { getInitials } from '@/composables/useInitials';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import Avatar from '../ui/avatar/Avatar.vue';
 import AvatarImage from '../ui/avatar/AvatarImage.vue';
 import AvatarFallback from '../ui/avatar/AvatarFallback.vue';
@@ -19,6 +19,8 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+const requested = ref(props.alreadyRequested || false);
+
 
 const showAvatar = computed(
     () => false,
@@ -27,6 +29,11 @@ const showAvatar = computed(
 function request() {
     router.post(requestAccess({ slug: props.organization.slug }), {
         organization_id: props.organization.id,
+    }, {
+        preserveScroll: true,
+        onSuccess: () => {
+            requested.value = true;
+        }
     });
 }
 </script>
@@ -53,7 +60,7 @@ function request() {
                 <Button variant="ghost">
                     View
                 </Button>
-                <template v-if="props.alreadyRequested">
+                <template v-if="requested">
                     <Button variant="outline" disabled>
                         Requested
                     </Button>
