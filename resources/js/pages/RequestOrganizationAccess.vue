@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { TriangleAlert } from 'lucide-vue-next';
+import { SearchX, TriangleAlert } from 'lucide-vue-next';
 import { Organization } from '@/types';
 import OrganizationAccess from '@/components/organization/OrganizationAccess.vue';
 import Pagination from '@/components/Pagination.vue';
@@ -19,7 +19,7 @@ defineProps<Props>();
 
 <template>
     <AppLayout>
-        <div class="px-4 py-6">
+        <div class="px-4 py-6 flex flex-col h-full">
             <template v-if="$page.props.auth.org === null">
                 <Card class="mb-6">
                     <CardHeader>
@@ -34,13 +34,27 @@ defineProps<Props>();
                 </Card>
             </template>
     
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <template v-for="organization in organizations.data" :key="organization.id">
-                    <OrganizationAccess :organization :already-requested="requested.includes(organization.id)" />
-                </template>
-            </div>
+            <template v-if="organizations.data.length === 0">
+                <div class="grow flex flex-col items-center justify-center">
+                    <SearchX class="size-10 mx-auto mb-4" />
+                    <h3 class="text-center mb-1">
+                        No organizations found
+                    </h3>
+                    <p class="text-center text-sm text-muted-foreground">
+                        There are no organizations available to request access to
+                    </p>
+                </div>
+            </template>
+            <template v-else>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                    <template v-for="organization in organizations.data" :key="organization.id">
+                        <OrganizationAccess :organization :already-requested="requested.includes(organization.id)" />
+                    </template>
+                </div>
 
-            <Pagination :links="organizations.links" />
+                <Pagination :links="organizations.links" />
+            </template>
+
         </div>
     </AppLayout>
 </template>

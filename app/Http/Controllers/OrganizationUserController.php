@@ -42,6 +42,7 @@ class OrganizationUserController extends Controller
     {
         $exists = OrganizationUserRequest::where('organization_id', $organization->id)
             ->where('user_id', $user->id)
+            ->where('status', OrgRequestStatus::PENDING->value)
             ->exists();
 
         if ($exists) {
