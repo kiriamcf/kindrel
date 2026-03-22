@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSpeciesRequest;
 use App\Http\Requests\UpdateSpeciesRequest;
 use App\Http\Resources\SpeciesResource;
 use App\Models\Species;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Response;

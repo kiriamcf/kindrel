@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBreedRequest;
 use App\Http\Requests\UpdateBreedRequest;
 use App\Http\Resources\BreedResource;
 use App\Models\Breed;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Response;

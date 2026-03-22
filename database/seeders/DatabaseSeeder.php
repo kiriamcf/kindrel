@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $organization = Organization::create([
-            'name' => 'Protectors de Gats', 
+            'name' => 'Protectors de Gats',
             'description' => 'Una organització dedicada a la protecció i el benestar dels gats.',
             'slug' => 'protectors-de-gats',
             'email' => 'info@protectorsdegats.org',

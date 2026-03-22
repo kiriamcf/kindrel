@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Web\Backoffice;
 
 use App\Enums\OrgRequestStatus;
+use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use App\Models\OrganizationUserRequest;
 use App\Models\User;
-use App\Http\Controllers\Controller;
-use Inertia\Inertia;
-use Inertia\Response;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class OrganizationUserController extends Controller
 {
@@ -87,7 +87,7 @@ class OrganizationUserController extends Controller
             ->where('status', OrgRequestStatus::PENDING->value)
             ->first();
 
-        if (!$request) {
+        if (! $request) {
             return Redirect::back()
                 ->with('error', 'No pending request found for this user and organization.');
         }
@@ -106,7 +106,7 @@ class OrganizationUserController extends Controller
             ->where('status', OrgRequestStatus::PENDING->value)
             ->first();
 
-        if (!$request) {
+        if (! $request) {
             return Redirect::back()
                 ->with('error', 'No pending request found for this user and organization.');
         }

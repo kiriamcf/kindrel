@@ -36,6 +36,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Organization::class);
     }
 
+    public function requests(): BelongsToMany
+    {
+        return $this->belongsToMany(Organization::class, 'organization_user_requests')
+            ->withPivot('status')
+            ->using(OrganizationUserRequest::class);
+    }
+
     /**
      * @return array<string, string>
      */
@@ -45,12 +52,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    public function requests(): BelongsToMany
-    {
-        return $this->belongsToMany(Organization::class, 'organization_user_requests')
-            ->withPivot('status')
-            ->using(OrganizationUserRequest::class);
     }
 }

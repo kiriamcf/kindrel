@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { OrganizationRequest } from '@/types';
+// import { OrganizationRequest } from '@/types';
 
-interface Props {
-    requests: OrganizationRequest[];
-}
+// interface Props {
+//     requests: OrganizationRequest[];
+// }
 
-const props = defineProps<Props>();
+// const props = defineProps<Props>();
 </script>
 
 <template>
