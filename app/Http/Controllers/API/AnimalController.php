@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Http\Requests\StoreAnimalRequest;
 use App\Http\Requests\UpdateAnimalRequest;
 use App\Http\Resources\AnimalResource;
 use App\Models\Animal;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Response;
@@ -17,11 +18,6 @@ class AnimalController extends Controller
     public function index(): AnonymousResourceCollection
     {
         return AnimalResource::collection(Animal::with('species')->paginate(100));
-    }
-
-    public function create()
-    {
-        //
     }
 
     public function store(StoreAnimalRequest $request): AnimalResource
@@ -36,11 +32,6 @@ class AnimalController extends Controller
         return AnimalResource::make($animal);
     }
 
-    public function edit(Animal $animal)
-    {
-        //
-    }
-
     public function update(UpdateAnimalRequest $request, Animal $animal): HttpResponse
     {
         $animal->update($request->validated());
@@ -53,10 +44,5 @@ class AnimalController extends Controller
         $animal->delete();
 
         return Response::noContent();
-    }
-
-    public function list()
-    {
-        //
     }
 }

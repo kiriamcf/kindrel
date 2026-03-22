@@ -17,7 +17,7 @@ import { Link, usePage } from '@inertiajs/vue3';
 import { LayoutGrid, KeyRound, IdCardLanyard, FingerprintPattern } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import { list } from '@/routes/backoffice/organizations';
-import { manageRequests } from '@/actions/App/Http/Controllers/OrganizationUserController';
+import { manageRequests } from '@/actions/App/Http/Controllers/Web/Backoffice/OrganizationUserController';
 
 const page = usePage();
 

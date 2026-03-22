@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\AnimalController;
-use App\Http\Controllers\BreedController;
-use App\Http\Controllers\OrganizationController;
-use App\Http\Controllers\SpeciesController;
+use App\Http\Controllers\API\AnimalController;
+use App\Http\Controllers\API\BreedController;
+use App\Http\Controllers\API\OrganizationController;
+use App\Http\Controllers\API\SpeciesController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('api.')->group(function () {

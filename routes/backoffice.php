@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\OrganizationUserController;
+use App\Http\Controllers\Web\Backoffice\DashboardController;
+use App\Http\Controllers\Web\Backoffice\OrganizationUserController;
 use App\Http\Middleware\Organization;
 use Illuminate\Support\Facades\Route;
 

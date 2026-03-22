@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web\Backoffice;
 
 use App\Enums\OrgRequestStatus;
 use App\Models\Organization;
 use App\Models\OrganizationUserRequest;
 use App\Models\User;
+use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Container\Attributes\CurrentUser;

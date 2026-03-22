@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Http\Requests\StoreBreedRequest;
 use App\Http\Requests\UpdateBreedRequest;
 use App\Http\Resources\BreedResource;
 use App\Models\Breed;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Response;
@@ -17,11 +18,6 @@ class BreedController extends Controller
     public function index(): AnonymousResourceCollection
     {
         return BreedResource::collection(Breed::with('species')->paginate(100));
-    }
-
-    public function create()
-    {
-        //
     }
 
     public function store(StoreBreedRequest $request): BreedResource
@@ -36,11 +32,6 @@ class BreedController extends Controller
         return BreedResource::make($breed);
     }
 
-    public function edit(Breed $breed)
-    {
-        //
-    }
-
     public function update(UpdateBreedRequest $request, Breed $breed): HttpResponse
     {
         $breed->update($request->validated());
@@ -53,10 +44,5 @@ class BreedController extends Controller
         $breed->delete();
 
         return Response::noContent();
-    }
-
-    public function list()
-    {
-        //
     }
 }
