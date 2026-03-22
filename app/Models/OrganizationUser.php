@@ -22,7 +22,7 @@ class OrganizationUser extends Pivot
     ];
 
     protected $casts = [
-        'status' => OrgRole::class,
+        'role' => OrgRole::class,
     ];
 
     public function organization(): BelongsTo

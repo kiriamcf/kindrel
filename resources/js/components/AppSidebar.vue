@@ -17,7 +17,8 @@ import { Link, usePage } from '@inertiajs/vue3';
 import { LayoutGrid, KeyRound, IdCardLanyard, FingerprintPattern } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import { list } from '@/routes/backoffice/organizations';
-import { manageRequests } from '@/actions/App/Http/Controllers/Web/Backoffice/OrganizationUserController';
+import { show as manageRequests } from '@/actions/App/Http/Controllers/Web/Backoffice/OrganizationUserRequestController';
+import { index as manageUsers } from '@/actions/App/Http/Controllers/Web/Backoffice/OrganizationUserController';
 
 const page = usePage();
 
@@ -41,8 +42,9 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Manage Users',
-        href: list(),
+        href: page.props.auth.org ? manageUsers(page.props.auth.org) : list(),
         icon: IdCardLanyard,
+        disabled: page.props.auth.org === null,
         group: 'Organization',
     },
 ];
