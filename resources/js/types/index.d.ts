@@ -17,6 +17,7 @@ export interface NavItem {
     icon?: LucideIcon;
     isActive?: boolean;
     disabled?: boolean;
+    group?: string;
 }
 
 export type AppPageProps<
@@ -46,6 +47,15 @@ export interface Organization {
     email: string;
     address?: string;
     phone?: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface OrganizationRequest {
+    id: number;
+    user: User;
+    organization: Organization;
+    status: 'pending' | 'accepted' | 'rejected';
     created_at: string;
     updated_at: string;
 }

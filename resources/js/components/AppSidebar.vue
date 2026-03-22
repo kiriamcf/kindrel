@@ -14,24 +14,37 @@ import {
 import { dashboard } from '@/routes/backoffice';
 import { type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
-import { LayoutGrid, KeyRound } from 'lucide-vue-next';
+import { LayoutGrid, KeyRound, IdCardLanyard, FingerprintPattern } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import { list } from '@/routes/backoffice/organizations';
+import { manageRequests } from '@/actions/App/Http/Controllers/OrganizationUserController';
 
 const page = usePage();
 
 const mainNavItems: NavItem[] = [
+    {
+        title: 'Dashboard',
+        href: dashboard(),
+        icon: LayoutGrid,
+    },
     {
         title: 'Request Access',
         href: list(),
         icon: KeyRound,
     },
     {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
+        title: 'Manage Requests',
+        href: page.props.auth.org ? manageRequests(page.props.auth.org) : list(),
+        icon: FingerprintPattern,
         disabled: page.props.auth.org === null,
-    }
+        group: 'Organization',
+    },
+    {
+        title: 'Manage Users',
+        href: list(),
+        icon: IdCardLanyard,
+        group: 'Organization',
+    },
 ];
 
 const footerNavItems: NavItem[] = [
