@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Web\Backoffice;
 
-use App\Enums\OrgRole;
+use App\Actions\OrganizationUser\AddOrganizationUserAction;
+use App\Actions\OrganizationUser\ListOrganizationUsersAction;
+use App\Actions\OrganizationUser\RemoveOrganizationUserAction;
+use App\Actions\OrganizationUser\UpdateOrganizationUserRoleAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateOrganizationMemberRequest;
 use App\Models\Organization;
@@ -16,60 +19,42 @@ use Inertia\Response;
 
 class OrganizationUserController extends Controller
 {
-    public function index(Organization $organization): Response
+    public function index(ListOrganizationUsersAction $action, Organization $organization): Response
     {
-        $users = $organization->users()
-            ->withPivot('role')
-            ->get()
-            ->map(function (User $user) {
-                return [
-                    'id' => $user->id,
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'role' => $user->pivot->role,
-                    'created_at' => $user->pivot->created_at,
-                    'updated_at' => $user->pivot->updated_at,
-                ];
-            });
+        $data = $action->execute($organization);
 
-        return Inertia::render('ManageOrganizationUsers', [
-            'users' => $users,
-            'organization' => $organization,
-        ]);
+        return Inertia::render('ManageOrganizationUsers', $data);
     }
 
-    public function store(Organization $organization, User $user): RedirectResponse
+    public function store(AddOrganizationUserAction $action, Organization $organization, User $user): RedirectResponse
     {
-        if ($organization->users()->where('user_id', $user->id)->exists()) {
-            return Redirect::back()
-                ->with('error', 'User is already a member of this organization.');
+        try {
+            $action->execute($organization, $user);
+            return Redirect::back()->with('success', 'User has been added to the organization.');
+        } catch (\Exception $e) {
+            return Redirect::back()->with('error', $e->getMessage());
         }
-
-        $organization->users()->attach($user->id, [
-            'role' => OrgRole::MEMBER->value,
-        ]);
-
-        return Redirect::back()
-            ->with('success', 'User has been added to the organization.');
     }
 
-    public function update(UpdateOrganizationMemberRequest $request, Organization $organization, User $user): RedirectResponse
+    public function update(UpdateOrganizationMemberRequest $request, UpdateOrganizationUserRoleAction $action, Organization $organization, User $user): RedirectResponse
     {
         $role = $request->validated('role');
 
-        $organization->users()->updateExistingPivot($user->id, [
-            'role' => $role,
-        ]);
-
-        return Redirect::back()
-            ->with('success', 'User role has been updated.');
+        try {
+            $action->execute($organization, $user, $role);
+            return Redirect::back()->with('success', 'User role has been updated.');
+        } catch (\Exception $e) {
+            return Redirect::back()->with('error', $e->getMessage());
+        }
     }
 
-    public function destroy(Organization $organization, User $user): RedirectResponse
+    public function destroy(RemoveOrganizationUserAction $action, Organization $organization, User $user): RedirectResponse
     {
-        $organization->users()->detach($user->id);
-
-        return Redirect::back()
-            ->with('success', 'User has been removed from the organization.');
+        try {
+            $action->execute($organization, $user);
+            return Redirect::back()->with('success', 'User has been removed from the organization.');
+        } catch (\Exception $e) {
+            return Redirect::back()->with('error', $e->getMessage());
+        }
     }
 }
