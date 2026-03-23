@@ -23,7 +23,7 @@ class OrganizationUserRequestController extends Controller
 {
     public function index(ListOrganizations $action, #[CurrentUser] User $user): Response
     {
-        $data = $action->execute($user);
+        $data = $action->execute($user)->toArray();
 
         return Inertia::render('RequestOrganizationAccess', $data);
     }
@@ -40,7 +40,7 @@ class OrganizationUserRequestController extends Controller
 
     public function show(ListRequests $action, Organization $organization): Response
     {
-        $data = $action->execute($organization);
+        $data = $action->execute($organization)->toArray();
 
         return Inertia::render('ManageOrganizationRequests', $data);
     }

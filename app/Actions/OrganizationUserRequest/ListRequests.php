@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Actions\OrganizationUserRequest;
 
+use App\Actions\OrganizationUserRequest\Dto\ListRequests as ListRequestsDto;
 use App\Models\Organization;
 use App\Models\User;
 
 class ListRequests
 {
-    public function execute(Organization $organization): array
+    public function execute(Organization $organization): ListRequestsDto
     {
         $requests = $organization->requests()
             ->withPivot('status')
@@ -25,8 +26,6 @@ class ListRequests
                 ];
             });
 
-        return [
-            'requests' => $requests,
-        ];
+        return new ListRequestsDto($requests);
     }
 }

@@ -21,7 +21,7 @@ class OrganizationUserController extends Controller
 {
     public function index(ListUsers $action, Organization $organization): Response
     {
-        $data = $action->execute($organization);
+        $data = $action->execute($organization)->toArray();
 
         return Inertia::render('ManageOrganizationUsers', $data);
     }

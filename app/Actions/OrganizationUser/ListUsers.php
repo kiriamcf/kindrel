@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Actions\OrganizationUser;
 
+use App\Actions\OrganizationUser\Dto\ListUsers as ListUsersDto;
 use App\Models\Organization;
 use App\Models\User;
 
 class ListUsers
 {
-    public function execute(Organization $organization): array
+    public function execute(Organization $organization): ListUsersDto
     {
         $users = $organization->users()
             ->withPivot('role')
@@ -25,9 +26,9 @@ class ListUsers
                 ];
             });
 
-        return [
-            'users' => $users,
-            'organization' => $organization,
-        ];
+        return new ListUsersDto(
+            $organization,
+            $users,
+        );
     }
 }

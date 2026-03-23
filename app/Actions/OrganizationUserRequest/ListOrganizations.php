@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\OrganizationUserRequest;
 
+use App\Actions\OrganizationUserRequest\Dto\ListOrganizations as ListOrganizationsDto;
 use App\Enums\OrgRequestStatus;
 use App\Models\Organization;
 use App\Models\OrganizationUserRequest;
@@ -11,7 +12,7 @@ use App\Models\User;
 
 class ListOrganizations
 {
-    public function execute(User $user): array
+    public function execute(User $user): ListOrganizationsDto
     {
         $requests = OrganizationUserRequest::where('user_id', $user->id)
             ->get(['organization_id', 'status']);
@@ -27,9 +28,9 @@ class ListOrganizations
         $organizations = Organization::whereIntegerNotInRaw('id', $granted)
             ->paginate(12);
 
-        return [
-            'organizations' => $organizations,
-            'requested' => $requested,
-        ];
+        return new ListOrganizationsDto(
+            $organizations,
+            $requested,
+        );
     }
 }
