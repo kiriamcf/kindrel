@@ -7,7 +7,7 @@ namespace App\Actions\OrganizationUser;
 use App\Models\Organization;
 use App\Models\User;
 
-class UpdateOrganizationUserRoleAction
+class UpdateUserRole
 {
     public function execute(Organization $organization, User $user, string $role): void
     {

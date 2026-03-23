@@ -7,7 +7,7 @@ namespace App\Actions\OrganizationUserRequest;
 use App\Models\Organization;
 use App\Models\User;
 
-class ListOrganizationRequestsAction
+class ListRequests
 {
     public function execute(Organization $organization): array
     {

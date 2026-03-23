@@ -9,7 +9,7 @@ use App\Models\Organization;
 use App\Models\OrganizationUserRequest;
 use App\Models\User;
 
-class UpdateOrganizationRequestStatusAction
+class UpdateRequestStatus
 {
     public function execute(Organization $organization, User $user, string $status): void
     {

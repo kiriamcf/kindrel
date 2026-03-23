@@ -8,7 +8,7 @@ use App\Enums\OrgRole;
 use App\Models\Organization;
 use App\Models\User;
 
-class AddOrganizationUserAction
+class AddUser
 {
     public function execute(Organization $organization, User $user): void
     {

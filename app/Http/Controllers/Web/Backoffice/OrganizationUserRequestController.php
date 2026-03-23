@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Web\Backoffice;
 
-use App\Actions\OrganizationUserRequest\ListOrganizationRequestsAction;
-use App\Actions\OrganizationUserRequest\ListOrganizationsForRequestAction;
-use App\Actions\OrganizationUserRequest\RequestOrganizationAccessAction;
-use App\Actions\OrganizationUserRequest\UpdateOrganizationRequestStatusAction;
+use App\Actions\OrganizationUserRequest\ListRequests;
+use App\Actions\OrganizationUserRequest\ListOrganizations;
+use App\Actions\OrganizationUserRequest\RequestAccess;
+use App\Actions\OrganizationUserRequest\UpdateRequestStatus;
 use App\Enums\OrgRequestStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateOrganizationUserRequest;
@@ -21,14 +21,14 @@ use Inertia\Response;
 
 class OrganizationUserRequestController extends Controller
 {
-    public function index(ListOrganizationsForRequestAction $action, #[CurrentUser] User $user): Response
+    public function index(ListOrganizations $action, #[CurrentUser] User $user): Response
     {
         $data = $action->execute($user);
 
         return Inertia::render('RequestOrganizationAccess', $data);
     }
 
-    public function store(RequestOrganizationAccessAction $action, Organization $organization, #[CurrentUser] User $user): RedirectResponse
+    public function store(RequestAccess $action, Organization $organization, #[CurrentUser] User $user): RedirectResponse
     {
         try {
             $action->execute($organization, $user);
@@ -38,14 +38,14 @@ class OrganizationUserRequestController extends Controller
         }
     }
 
-    public function show(ListOrganizationRequestsAction $action, Organization $organization): Response
+    public function show(ListRequests $action, Organization $organization): Response
     {
         $data = $action->execute($organization);
 
         return Inertia::render('ManageOrganizationRequests', $data);
     }
 
-    public function update(UpdateOrganizationUserRequest $request, UpdateOrganizationRequestStatusAction $action, Organization $organization, User $user): RedirectResponse
+    public function update(UpdateOrganizationUserRequest $request, UpdateRequestStatus $action, Organization $organization, User $user): RedirectResponse
     {
         $status = $request->validated('status');
 

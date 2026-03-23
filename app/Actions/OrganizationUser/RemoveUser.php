@@ -7,7 +7,7 @@ namespace App\Actions\OrganizationUser;
 use App\Models\Organization;
 use App\Models\User;
 
-class RemoveOrganizationUserAction
+class RemoveUser
 {
     public function execute(Organization $organization, User $user): void
     {
